@@ -8,17 +8,6 @@
     - java-1.8.0-openjdk
     - java-1.8.0-openjdk-devel
 
-- name: Install logrotate configs for solr
-  ansible.builtin.template:
-    dest: /etc/logrotate.d/mira
-    src: logrotate/mira
-    owner: "root"
-    group: "root"
-    mode: 0640
-  become: true
-- import_tasks: user.yml
-  when: solr_create_user
-
 - name: Set solr_filename for Solr 4+.
   set_fact:
     solr_filename: "solr-{{ solr_version }}"

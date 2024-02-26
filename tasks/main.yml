@@ -58,6 +58,7 @@
   when: "solr_version.split('.')[0] >= '5'"
 
 - name: Ensure solr is started and enabled on boot if configured.
+  become: true
   service:
     name: "{{ solr_service_name }}"
     state: "{{ solr_service_state }}"

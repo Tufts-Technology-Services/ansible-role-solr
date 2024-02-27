@@ -8,6 +8,11 @@
     - java-1.8.0-openjdk
     - java-1.8.0-openjdk-devel
 
+---
+- name: Display ansible_service_mgr value
+  debug:
+    var: ansible_service_mgr
+
 - name: Set solr_filename for Solr 4+.
   set_fact:
     solr_filename: "solr-{{ solr_version }}"

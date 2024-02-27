@@ -1,5 +1,6 @@
 ---
 - name: Remove existing SOLR_HEAP configuration.
+  become: true
   lineinfile:
     dest: "{{ solr_config_file }}"
     regexp: "^SOLR_HEAP"
@@ -7,6 +8,7 @@
   notify: restart solr
 
 - name: Apply Solr configuration changes.
+  become: true
   lineinfile:
     dest: "{{ solr_config_file }}"
     regexp: "{{ item.regexp }}"

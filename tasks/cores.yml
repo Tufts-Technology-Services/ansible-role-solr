@@ -7,6 +7,7 @@
   check_mode: false
 
 - name: Ensure Solr conf directories exist.
+  become: true
   file:
     path: "{{ solr_home }}/data/{{ item }}/conf"
     state: directory
@@ -16,12 +17,13 @@
     mode: 0755
   when: "item not in solr_cores_current.content"
   with_items: "{{ solr_cores }}"
+  become_user: "{{ solr_user }}"
 
 - name: Ensure core configuration directories exist.
+  become: true
   command: "cp -r {{ solr_default_core_path }} {{ solr_home }}/data/{{ item }}/"
   when: "item not in solr_cores_current.content"
   with_items: "{{ solr_cores }}"
-  become: true
   become_user: "{{ solr_user }}"
 
 - name: Create configured cores.

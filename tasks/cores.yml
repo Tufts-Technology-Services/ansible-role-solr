@@ -1,7 +1,7 @@
 ---
 - name: Check current list of Solr cores.
   uri:
-    url: http://{{ solr_connect_host }}:{{ solr_port }}/solr/admin/cores
+    url: http://{{ests_user}}:{{ests_pass}}@{{ solr_connect_host }}:{{ solr_port }}/solr/admin/cores
     return_content: true
   register: solr_cores_current
   check_mode: false

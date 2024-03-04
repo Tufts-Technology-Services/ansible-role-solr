@@ -8,14 +8,6 @@
       - sudo
     state: present
 
-- name: Ensure service wrapper is installed for RHEL 9+.
-  become: true
-  package:
-    name:
-      - initscripts-service
-      - chkconfig
-    state: present
-
 # We add '-n' to Solr versions beyond 6.3.0 to prevent autostart on install.
 - name: Run Solr installation script.
   become: true

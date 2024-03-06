@@ -8,6 +8,19 @@
       - sudo
     state: present
 
+- name: Print Solr installation command
+  debug:
+    msg: >
+      {{ solr_workspace }}/{{ solr_filename }}/bin/install_solr_service.sh
+      {{ solr_workspace }}/{{ solr_filename }}.tgz
+      -i {{ solr_install_dir }}
+      -d {{ solr_home }}
+      -u {{ solr_user }}
+      -s {{ solr_service_name }}
+      -p {{ solr_port }}
+      {{ (solr_version is version('6.3.0', '>=')) | ternary('-n','') }}
+      {{ (solr_version is version('5.4.0', '>=')) | ternary('-f','') }}
+
 # We add '-n' to Solr versions beyond 6.3.0 to prevent autostart on install.
 - name: Run Solr installation script.
   become: true
